@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DONAT ЭНЕРГИЯ - Mellstroy Energy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .energy-page {
+            background: linear-gradient(135deg, #006400 0%, #00FF00 50%, #006400 100%);
+            min-height: 100vh;
+            position: relative;
+            
+        }
+        .energy-page::before {
+            content: "💰";
+            font-size: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.15;
+            z-index: 0;
+            animation: moneySpin 5s linear infinite;
+        }
+        @keyframes moneySpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.1); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+        }
+        .energy-content {
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .energy-image-container {
+            width: 300px;
+            height: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+        .energy-image {
+            width: 100%;
+            height: 100%;
+            border: 8px solid #ffd700;
+            border-radius: 20px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateX(10deg);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .energy-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0,255,0,0.2), transparent);
+            animation: greenPulse 3s infinite;
+        }
+        @keyframes greenPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        .energy-image:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+        }
+        .recommendations {
+            background: rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px auto;
+            border: 3px solid #ffd700;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+        .mellstroy-quote {
+            font-size: 1.4em;
+            color: #ffd700;
+            font-style: italic;
+            margin: 25px 0;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .energy-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .dollar-sign {
+            position: absolute;
+            font-size: 40px;
+            color: #00FF00;
+            animation: dollarRain 6s linear infinite;
+            opacity: 0;
+        }
+        @keyframes dollarRain {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="energy-page">
+    <header class="header" style="background: linear-gradient(90deg, #006400, #00FF00);">
+        <div class="container">
+            <h1 class="logo">DONAT ЭНЕРГИЯ</h1>
+            <p class="slogan">"ДОНАТИШЬ - ЗАРЯЖАЕШЬСЯ!"</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="energy1.html" class="nav-link">ENERGY OF YOUR DEP</a>
+            <a href="energy2.html" class="nav-link">ЭНЕРГИЯ КОРОЛЯ</a>
+            <a href="energy3.html" class="nav-link active">DONAT ЭНЕРГИЯ</a>
+            <a href="energy4.html" class="nav-link">ЖЕСТКАЯ ЭНЕРГИЯ</a>
+            <a href="energy5.html" class="nav-link">ХОЛОДНЫЙ БЕСПРЕДЕЛ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="energy-content">
+            <div class="mellstroy-quote">"Donat Энергия - заряжайся от донатов подписчиков! Чем больше донатов, тем мощнее заряд!"</div>
+            
+            <div class="energy-image-container">
+                <div class="energy-image">
+                    <img src="images/energy1.jpeg" alt="DONAT ЭНЕРГИЯ">
+                </div>
+            </div>
+            
+            <div class="energy-description">
+                <p>Энергетик для стримеров и контентмейкеров. Каждая банка - как щедрый донат от подписчика!</p>
+            </div>
+            
+            <div class="recommendations">
+                <h2>💪 РЕКОМЕНДАЦИИ К ПРИМЕНЕНИЮ:</h2>
+                <p><strong>"Пей когда: нужно провести 12-часовой стрим без усталости!"</strong></p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong>✅ ЦЕНА:</strong><br>Стоит как донат
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ЭФФЕКТ:</strong><br>До следующего доната
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ДЛЯ КОГО:</strong><br>Стримеры
+                    </div>
+                    <div class="stat-item">
+                        <strong>⚠️ ОСТОРОЖНО:</strong><br>Можно улететь в +100500
+                    </div>
+                </div>
+                
+                <div class="mellstroy-meme">
+                    <p><strong>💊 ДОЗИРОВКА:</strong> 1 банка = +1000 к карме стримера</p>
+                    <p><em>"После Donat Энергии донаты сами летят в чат!" © Mellstroy</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>🚨 ВНИМАНИЕ: Сайт создан исключительно в юмористических целях и не несет никакого коммерческого смысла. Все совпадения случайны. Не злоупотребляйте энергетиками! 🚨</p>
+                <p class="mellstroy-meme">"Шучу, конечно, пейте сколько влезет! © Mellstroy"</p>
+            </div>
+            <div class="contact">
+                <p>Для сотрудничества: <strong>mellstroy.energy@mail.ru</strong></p>
+            </div>
+            <div class="footer-meme">
+                <p>💊 ПРИНИМАЙТЕ ОТВЕТСТВЕННО: УТРОМ, ДНЕМ И ПЕРЕД СТРИМОМ! 💊</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Добавляем падающие доллары
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const dollar = document.createElement('div');
+                    dollar.className = 'dollar-sign';
+                    dollar.innerHTML = '💵';
+                    dollar.style.left = Math.random() * 100 + 'vw';
+                    dollar.style.animationDelay = Math.random() * 4 + 's';
+                    document.body.appendChild(dollar);
+                }, i * 500);
+            }
+        });
+    </script>
+</body>
+</html>

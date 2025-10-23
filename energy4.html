@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЖЕСТКАЯ ЭНЕРГИЯ - Mellstroy Energy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .energy-page {
+            background: linear-gradient(135deg, #CCCC00 0%, #FFFF00 50%, #CCCC00 100%);
+            min-height: 100vh;
+            position: relative;
+            
+        }
+        .energy-page::before {
+            content: "💥";
+            font-size: 350px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: 0;
+            animation: explosion 2s ease-in-out infinite;
+        }
+        @keyframes explosion {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+        .energy-content {
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .energy-image-container {
+            width: 300px;
+            height: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+        .energy-image {
+            width: 100%;
+            height: 100%;
+            border: 8px solid #ff0000;
+            border-radius: 20px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateY(-8deg) rotateZ(-2deg);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .energy-image::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(255,0,0,0.8), transparent 70%);
+            filter: blur(8px);
+            animation: shockwave 2s ease-in-out infinite alternate;
+        }
+        @keyframes shockwave {
+            0% { opacity: 0.5; transform: translateX(-50%) scaleX(0.8); }
+            100% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
+        }
+        .energy-image:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateZ(0deg) scale(1.05);
+        }
+        .recommendations {
+            background: rgba(255, 255, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px auto;
+            border: 3px solid #ff0000;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ff0000;
+        }
+        .mellstroy-quote {
+            font-size: 1.4em;
+            color: #ff0000;
+            font-style: italic;
+            margin: 25px 0;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .energy-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #000;
+            font-weight: bold;
+        }
+        .crack {
+            position: absolute;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #ff0000, transparent);
+            animation: crackAppear 4s infinite;
+            opacity: 0;
+        }
+        @keyframes crackAppear {
+            0%, 100% { opacity: 0; transform: translateY(-100px) rotate(45deg); }
+            10% { opacity: 1; }
+            20% { opacity: 0; transform: translateY(100px) rotate(45deg); }
+        }
+    </style>
+</head>
+<body class="energy-page">
+    <header class="header" style="background: linear-gradient(90deg, #CCCC00, #FFFF00);">
+        <div class="container">
+            <h1 class="logo">ЖЕСТКАЯ ЭНЕРГИЯ</h1>
+            <p class="slogan">"ДЛЯ НАСТОЯЩИХ ПАЦАНОВ!"</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="energy1.html" class="nav-link">ENERGY OF YOUR DEP</a>
+            <a href="energy2.html" class="nav-link">ЭНЕРГИЯ КОРОЛЯ</a>
+            <a href="energy3.html" class="nav-link">DONAT ЭНЕРГИЯ</a>
+            <a href="energy4.html" class="nav-link active">ЖЕСТКАЯ ЭНЕРГИЯ</a>
+            <a href="energy5.html" class="nav-link">ХОЛОДНЫЙ БЕСПРЕДЕЛ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="energy-content">
+            <div class="mellstroy-quote">"Жесткая Энергия - для тех, кто не знает пощады! Если слабак - даже не пробуй!"</div>
+            
+            <div class="energy-image-container">
+                <div class="energy-image">
+                    <img src="images/energy1.jpeg" alt="ЖЕСТКАЯ ЭНЕРГИЯ">
+                </div>
+            </div>
+            
+            <div class="energy-description">
+                <p>Энергетик для настоящих мужиков. Не для слабаков и маминких сынков!</p>
+            </div>
+            
+            <div class="recommendations">
+                <h2>💪 РЕКОМЕНДАЦИИ К ПРИМЕНЕНИЮ:</h2>
+                <p><strong>"Пей когда: нужно показать всем, кто здесь главный пацан!"</strong></p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong>✅ ЖЕСТКОСТЬ:</strong><br>Уровень MAX
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ЭФФЕКТ:</strong><br>Мощь 10 часов
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ДЛЯ КОГО:</strong><br>Настоящие пацаны
+                    </div>
+                    <div class="stat-item">
+                        <strong>⚠️ ОСТОРОЖНО:</strong><br>Можно сломать всё
+                    </div>
+                </div>
+                
+                <div class="mellstroy-meme">
+                    <p><strong>💊 ДОЗИРОВКА:</strong> 1 банка = +999 к уважению</p>
+                    <p><em>"После Жесткой Энергии хочется ломать стулья и набирать 100к зрителей!" © Mellstroy</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>🚨 ВНИМАНИЕ: Сайт создан исключительно в юмористических целях и не несет никакого коммерческого смысла. Все совпадения случайны. Не злоупотребляйте энергетиками! 🚨</p>
+                <p class="mellstroy-meme">"Шучу, конечно, пейте сколько влезет! © Mellstroy"</p>
+            </div>
+            <div class="contact">
+                <p>Для сотрудничества: <strong>mellstroy.energy@mail.ru</strong></p>
+            </div>
+            <div class="footer-meme">
+                <p>💊 ПРИНИМАЙТЕ ОТВЕТСТВЕННО: УТРОМ, ДНЕМ И ПЕРЕД СТРИМОМ! 💊</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Добавляем трещины
+        document.addEventListener('DOMContentLoaded', function() {
+            function createCrack() {
+                const crack = document.createElement('div');
+                crack.className = 'crack';
+                crack.style.left = Math.random() * 100 + 'vw';
+                crack.style.animationDelay = Math.random() * 3 + 's';
+                document.body.appendChild(crack);
+                
+                setTimeout(() => {
+                    crack.remove();
+                }, 4000);
+            }
+            
+            setInterval(createCrack, 1000);
+        });
+    </script>
+</body>
+</html>

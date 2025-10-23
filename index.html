@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mellstroy Energy - Официальный сайт энергетиков</title>
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="main-page">
+    <!-- Фон всех энергетиков -->
+    <div class="main-background"></div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">MELLSTROY ENERGY</h1>
+            <p class="slogan">"ПЬЁШЬ ДО ДНА - ЖИВЕШЬ ДО ПОБЕДЫ!"</p>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="energy-card">Главная</a>
+            <a href="energy1.html" class="energy-card">ENERGY OF YOUR DEP</a>
+            <a href="energy2.html" class="energy-card">ЭНЕРГИЯ КОРОЛЯ</a>
+            <a href="energy3.html" class="energy-card">DONAT ЭНЕРГИЯ</a>
+            <a href="energy4.html" class="energy-card">ЖЕСТКАЯ ЭНЕРГИЯ</a>
+            <a href="energy5.html" class="energy-card">ХОЛОДНЫЙ БЕСПРЕДЕЛ</a>
+        </div>
+    </nav>
+
+    <!-- Казино-слот -->
+    <section class="casino-section">
+        <div class="container">
+            <div class="slot-title">
+                <h2>🎰 ИСПЫТАЙ УДАЧУ 🎰</h2>
+                <p class="slot-subtitle">ВЫИГРАЙ МЕСЯЧНЫЙ ЗАПАС ЭНЕРГЕТИКОВ!</p>
+                <p class="mellstroy-quote">"Как в казино - либо пан, либо пропал!"</p>
+            </div>
+            
+            <div class="slot-machine">
+                <div class="slot-frame">
+                    <div class="slot-container">
+                        <div class="slot" id="slot1">
+                            <img src="images/slot1.jpeg" alt="Слот 1" class="slot-image">
+                        </div>
+                        <div class="slot" id="slot2">
+                            <img src="images/slot2.jpg" alt="Слот 2" class="slot-image">
+                        </div>
+                        <div class="slot" id="slot3">
+                            <img src="images/slot3.gif" alt="Слот 3" class="slot-image">
+                        </div>
+                    </div>
+                </div>
+                <button class="spin-button" onclick="spinSlots()">
+                    <span>КРУТИТЬ СЛОТ!</span>
+                    <div class="button-glow"></div>
+                </button>
+                <audio id="slotSound" src="sounds/slot-sound.mp3"></audio>
+            </div>
+            
+            <div class="meme-text">
+                <p>💸 СТАВКИ СДЕЛАНЫ - ВЫИГРЫШ ТВОЙ! 💸</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Энергетики -->
+    <section class="energies-section">
+        <div class="container">
+            <h2>НАША ЛИНЕЙКА ЭНЕРГЕТИКОВ</h2>
+            <div class="energies-grid">
+                <div class="energy-card" onclick="location.href='energy1.html'">
+                    <div class="energy-color red"></div>
+                    <h3>ENERGY OF YOUR DEP</h3>
+                    <p>"Заливаешь деп - получаешь заряд!"</p>
+                </div>
+                <div class="energy-card" onclick="location.href='energy2.html'">
+                    <div class="energy-color purple"></div>
+                    <h3>ЭНЕРГИЯ КОРОЛЯ</h3>
+                    <p>"Для тех, кто правит миром!"</p>
+                </div>
+                <div class="energy-card" onclick="location.href='energy3.html'">
+                    <div class="energy-color green"></div>
+                    <h3>DONAT ЭНЕРГИЯ</h3>
+                    <p>"Донатишь - заряжаешься!"</p>
+                </div>
+                <div class="energy-card" onclick="location.href='energy4.html'">
+                    <div class="energy-color yellow"></div>
+                    <h3>ЖЕСТКАЯ ЭНЕРГИЯ</h3>
+                    <p>"Для настоящих пацанов!"</p>
+                </div>
+                <div class="energy-card" onclick="location.href='energy5.html'">
+                    <div class="energy-color blue"></div>
+                    <h3>ХОЛОДНЫЙ БЕСПРЕДЕЛ</h3>
+                    <p>"Лед в жилах, огонь в душе!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>🚨 ВНИМАНИЕ: Сайт создан исключительно в юмористических целях и не несет никакого коммерческого смысла. Все совпадения случайны. Не злоупотребляйте энергетиками! 🚨</p>
+                <p class="mellstroy-meme">"Шучу, конечно, пейте сколько влезет! © Mellstroy"</p>
+            </div>
+            <div class="contact">
+                <p>Для сотрудничества: <strong>mellstroy.energy@mail.ru</strong></p>
+            </div>
+            <div class="footer-meme">
+                <p>💊 ПРИНИМАЙТЕ ОТВЕТСТВЕННО: УТРОМ, ДНЕМ И ПЕРЕД СТРИМОМ! 💊</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

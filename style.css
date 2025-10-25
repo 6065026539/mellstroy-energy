@@ -891,4 +891,67 @@ body::before {
     .promo-text {
         font-size: 0.55em;
     }
+
+}
+/* ФИКС ПРОКРУТКИ ДЛЯ МОБИЛЬНЫХ */
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Отключаем масштабирование на тап */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Разрешаем выделение текста в контенте */
+.container, .recommendations, .energy-description, .disclaimer {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* ФИКС ДЛЯ ФИКСИРОВАННЫХ ФОНОВ НА МОБИЛЬНЫХ */
+@media (max-width: 768px) {
+    body::before,
+    .energy-page::after,
+    .main-page::after {
+        position: absolute;
+        height: 100vh;
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    
+    /* Улучшаем производительность прокрутки */
+    .container, .energy-content, .recommendations {
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+
+/* ФИКС ДЛЯ IOS SAFARI */
+@supports (-webkit-touch-callout: none) {
+    body {
+        height: -webkit-fill-available;
+    }
+    
+    .main-page, .energy-page {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Убираем скачки при клике на мобильных */
+a, button, .nav-link, .energy-card, .spin-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* ФИКС ДЛЯ КНОПКИ МУЗЫКИ НА МОБИЛЬНЫХ */
+.music-toggle {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }

@@ -949,11 +949,6 @@ a, button, .nav-link, .energy-card, .spin-button {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
-
-/* ФИКС ДЛЯ КНОПКИ МУЗЫКИ НА МОБИЛЬНЫХ */
-.music-toggle {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
 }
 /* ФИКС ПРОКРУТКИ ДЛЯ МОБИЛЬНЫХ */
 .main-page { overflow: visible !important; }
@@ -961,3 +956,68 @@ a, button, .nav-link, .energy-card, .spin-button {
 body { overflow-x: hidden; }
 html { overflow-x: hidden; }
 
+/* ФИКС ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media (max-width: 768px) {
+    .energy-image-container {
+        width: 250px !important;
+        height: 400px !important;
+        margin: 20px auto;
+    }
+    
+    .logo {
+        font-size: 1.8em !important;
+        text-shadow: 2px 2px 0 var(--black) !important;
+    }
+    
+    .slogan {
+        font-size: 1em !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .recommendations {
+        padding: 20px !important;
+        margin: 20px auto !important;
+    }
+    
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    /* Убираем сложные анимации на мобильных */
+    .energy-page::before {
+        font-size: 150px !important;
+    }
+    
+    .jewels, .dollar-sign, .crack, .snowflake {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .energy-image-container {
+        width: 200px !important;
+        height: 320px !important;
+    }
+    
+    .logo {
+        font-size: 1.5em !important;
+    }
+    
+    .nav-link {
+        padding: 8px 12px !important;
+        font-size: 0.8em !important;
+        margin: 2px !important;
+    }
+    
+    .promo-block {
+        max-width: 150px !important;
+    }
+    
+    .promo-text {
+        font-size: 0.6em !important;
+    }
+}

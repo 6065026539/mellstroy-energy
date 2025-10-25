@@ -1021,3 +1021,15 @@ html { overflow-x: hidden; }
         font-size: 0.6em !important;
     }
 }
+/* ВРЕМЕННЫЙ ФИКС ДЛЯ ТЕСТИРОВАНИЯ */
+@media (max-width: 768px) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .energy-image-container {
+        width: 200px !important;
+        height: 300px !important;
+    }
+}

@@ -1,5 +1,6 @@
 // Упрощенный и исправленный скрипт для слотов
 let isSpinning = false;
+let slotSound = null;
 
 function spinSlots() {
     if (isSpinning) return;
@@ -7,6 +8,9 @@ function spinSlots() {
     isSpinning = true;
     const slots = document.querySelectorAll('.slot');
     const spinButton = document.querySelector('.spin-button');
+    
+    // Воспроизводим звук на всех устройствах
+    playSlotSound();
     
     spinButton.disabled = true;
     spinButton.style.opacity = '0.7';
@@ -40,6 +44,37 @@ function spinSlots() {
             }
         }, 100);
     });
+}
+
+function playSlotSound() {
+    try {
+        // Создаем аудио элемент если его нет
+        if (!slotSound) {
+            slotSound = new Audio('sounds/slot-sound.mp3');
+            slotSound.preload = 'auto';
+            
+            // Для мобильных - ждем когда пользователь взаимодействовал со страницей
+            document.addEventListener('touchstart', function() {
+                if (slotSound) {
+                    slotSound.load();
+                }
+            }, { once: true });
+        }
+        
+        // Сбрасываем и воспроизводим
+        slotSound.currentTime = 0;
+        slotSound.play().catch(e => {
+            console.log('Audio play failed, trying fallback:', e);
+            // Пробуем альтернативный способ для мобильных
+            setTimeout(() => {
+                if (slotSound) {
+                    slotSound.play().catch(e2 => console.log('Fallback also failed:', e2));
+                }
+            }, 100);
+        });
+    } catch (error) {
+        console.log('Sound error:', error);
+    }
 }
 
 function finishSpin() {
@@ -102,6 +137,26 @@ function showWinMessage() {
     document.body.appendChild(winPopup);
 }
 
+// Предзагрузка звука при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     console.log("💊 MELLSTROY ENERGY - Сайт загружен!");
+    
+    // Предзагружаем звук для быстрого доступа
+    setTimeout(() => {
+        try {
+            slotSound = new Audio('sounds/slot-sound.mp3');
+            slotSound.preload = 'auto';
+            slotSound.load();
+            
+            // Для iOS - нужно пользовательское действие для загрузки звука
+            document.addEventListener('touchstart', function initSound() {
+                if (slotSound) {
+                    slotSound.load();
+                }
+                document.removeEventListener('touchstart', initSound);
+            });
+        } catch (error) {
+            console.log('Sound preload error:', error);
+        }
+    }, 1000);
 });

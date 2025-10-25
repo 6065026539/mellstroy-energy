@@ -955,3 +955,9 @@ a, button, .nav-link, .energy-card, .spin-button {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
+/* ФИКС ПРОКРУТКИ ДЛЯ МОБИЛЬНЫХ */
+.main-page { overflow: visible !important; }
+.energy-page { overflow: visible !important; }
+body { overflow-x: hidden; }
+html { overflow-x: hidden; }
+

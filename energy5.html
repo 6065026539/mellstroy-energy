@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ХОЛОДНЫЙ БЕСПРЕДЕЛ - Mellstroy Energy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .energy-page {
+            background: linear-gradient(135deg, #000080 0%, #0066FF 50%, #000080 100%);
+            min-height: 100vh;
+            position: relative;
+            
+        }
+        .energy-page::before {
+            content: "❄️";
+            font-size: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: 0;
+            animation: snowFloat 4s ease-in-out infinite;
+        }
+        @keyframes snowFloat {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-52%, -48%) rotate(-10deg); }
+            75% { transform: translate(-48%, -52%) rotate(10deg); }
+        }
+        .energy-content {
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .energy-image-container {
+            width: 300px;
+            height: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+        .energy-image {
+            width: 100%;
+            height: 100%;
+            border: 8px solid #00FFFF;
+            border-radius: 20px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .energy-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,0.3), transparent);
+            animation: frost 3s infinite;
+        }
+        @keyframes frost {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .energy-image:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
+        }
+        .recommendations {
+            background: rgba(0, 102, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px auto;
+            border: 3px solid #00FFFF;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00FFFF;
+        }
+        .mellstroy-quote {
+            font-size: 1.4em;
+            color: #00FFFF;
+            font-style: italic;
+            margin: 25px 0;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .energy-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .snowflake {
+            position: absolute;
+            font-size: 25px;
+            color: #00FFFF;
+            animation: snowFall 8s linear infinite;
+            opacity: 0;
+        }
+        @keyframes snowFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="energy-page energy5">
+    <header class="header">
+    <div class="promo-block">
+        <img src="images/promo.png" alt="Промо" class="promo-image">
+        <div class="promo-text">ВЫИГРЫВАЙ СЕЙЧАС</div>
+     </div>
+     <div class="container">
+        <h1 class="logo">ХОЛОДНЫЙ БЕСПРЕДЕЛ</h1>
+        <p class="slogan">"БЕМ БЕМ БЕМ БЕМ"</p>
+     </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="energy1.html" class="nav-link">ENERGY OF YOUR DEP</a>
+            <a href="energy2.html" class="nav-link">ЭНЕРГИЯ КОРОЛЯ</a>
+            <a href="energy3.html" class="nav-link">DONAT ЭНЕРГИЯ</a>
+            <a href="energy4.html" class="nav-link">ЖЕСТКАЯ ЭНЕРГИЯ</a>
+            <a href="energy5.html" class="nav-link active">ХОЛОДНЫЙ БЕСПРЕДЕЛ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="energy-content">
+            <div class="mellstroy-quote">"Холодный Беспредел - лед в жилах, но огонь в душе! Для тех, кто не боится экстрима!"</div>
+            
+            <div class="energy-slogan">"БЕМ БЕМ БЕМ БЕМ"</div>
+            <div id="slider-energy5"></div>
+            
+            <div class="energy-description">
+                <p>Ледяной энергетик для самых смелых. Ощути холод Арктики и жар страсти одновременно!</p>
+            </div>
+            
+            <div class="recommendations">
+                <h2>💪 РЕКОМЕНДАЦИИ К ПРИМЕНЕНИЮ:</h2>
+                <p><strong>"Пей когда: нужно охладить пыл врагов и разжечь свой!"</strong></p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong>✅ ТЕМПЕРАТУРА:</strong><br>-50°C
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ЭФФЕКТ:</strong><br>Арктический заряд
+                    </div>
+                    <div class="stat-item">
+                        <strong>✅ ДЛЯ КОГО:</strong><br>Экстремалы
+                    </div>
+                    <div class="stat-item">
+                        <strong>⚠️ ОСТОРОЖНО:</strong><br>Можно заморозить
+                    </div>
+                </div>
+                
+                <div class="mellstroy-meme">
+                    <p><strong>💊 ДОЗИРОВКА:</strong> 1 банка = лед в жилах на 8 часов</p>
+                    <p><em>"После Холодного Беспредела хейтеры замерзают на месте!" © Mellstroy</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="disclaimer">
+                <p>🚨 ВНИМАНИЕ: Сайт создан исключительно в юмористических целях и не несет никакого коммерческого смысла. Все совпадения случайны. Не злоупотребляйте энергетиками! 🚨</p>
+                <p class="mellstroy-meme">"Шучу, конечно, пейте сколько влезет! © Mellstroy"</p>
+            </div>
+            <div class="contact">
+                <p>Для сотрудничества: <strong>mellstroy.energy@mail.ru</strong></p>
+            </div>
+            <div class="footer-meme">
+                <p>💊 ПРИНИМАЙТЕ ОТВЕТСТВЕННО: УТРОМ, ДНЕМ И ПЕРЕД СТРИМОМ! 💊</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Добавляем снежинки
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const snowflake = document.createElement('div');
+                    snowflake.className = 'snowflake';
+                    snowflake.innerHTML = '❄️';
+                    snowflake.style.left = Math.random() * 100 + 'vw';
+                    snowflake.style.animationDelay = Math.random() * 6 + 's';
+                    snowflake.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    document.body.appendChild(snowflake);
+                }, i * 300);
+            }
+        });
+    </script>
+    <script src="slider.js"></script>
+</body>
+</html>

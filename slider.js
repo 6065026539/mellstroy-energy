@@ -1,3 +1,4 @@
+try {
 // Слайдер для страниц энергетиков
 class EnergySlider {
     constructor(containerId, images) {
@@ -169,4 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'images/back_blue.png'
         ]);
     }
+
 });
+} catch (error) {
+    console.log('Ошибка в слайдере:', error);
+}

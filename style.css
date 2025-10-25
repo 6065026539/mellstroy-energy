@@ -1,4 +1,3 @@
-/* Базовые стили */
 * {
     margin: 0;
     padding: 0;
@@ -21,9 +20,13 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* ОБЩИЙ ФОН ДЛЯ ВСЕХ СТРАНИЦ */
+html {
+    overflow-x: hidden;
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -36,7 +39,6 @@ body::before {
     opacity: 0.4;
 }
 
-/* КЛАССНЫЙ ФОН ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
 .main-page::after {
     content: "";
     position: fixed;
@@ -52,6 +54,7 @@ body::before {
         rgba(255, 255, 0, 0.3));
     z-index: -1;
     animation: gradientShift 8s ease infinite;
+    background-size: 400% 400%;
 }
 
 @keyframes gradientShift {
@@ -60,63 +63,6 @@ body::before {
     100% { background-position: 0% 50%; }
 }
 
-/* ФИЛЬТРЫ ДЛЯ СТРАНИЦ ЭНЕРГЕТИКОВ */
-.energy1::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(139, 0, 0, 0.7), rgba(178, 34, 34, 0.7));
-    z-index: -1;
-}
-
-.energy2::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(75, 0, 130, 0.7), rgba(138, 43, 226, 0.7));
-    z-index: -1;
-}
-
-.energy3::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 100, 0, 0.7), rgba(0, 255, 0, 0.7));
-    z-index: -1;
-}
-
-.energy4::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(204, 204, 0, 0.7), rgba(255, 255, 0, 0.7));
-    z-index: -1;
-}
-
-.energy5::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 128, 0.7), rgba(0, 102, 255, 0.7));
-    z-index: -1;
-}
-
-/* КОНТЕЙНЕР */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -125,7 +71,6 @@ body::before {
     z-index: 1;
 }
 
-/* ШАПКА */
 .header {
     background: linear-gradient(90deg, var(--red), var(--purple), var(--green), var(--yellow), var(--blue));
     padding: 30px 0;
@@ -138,10 +83,12 @@ body::before {
     align-items: center;
     justify-content: center;
 }
+
 .header .container {
     position: relative;
     z-index: 2;
 }
+
 .header::before {
     content: "";
     position: absolute;
@@ -152,21 +99,21 @@ body::before {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
     animation: shine 3s infinite;
 }
-/* Индивидуальные цвета для шапок страниц энергетиков */
-.energy1 .header { background: linear-gradient(90deg, #8B0000, #B22222); }
-.energy2 .header { background: linear-gradient(90deg, #4B0082, #8A2BE2); }
-.energy3 .header { background: linear-gradient(90deg, #006400, #00FF00); }
-.energy4 .header { background: linear-gradient(90deg, #CCCC00, #FFFF00); }
-.energy5 .header { background: linear-gradient(90deg, #000080, #0066FF); }
 
 @keyframes shine {
     0% { left: -100%; }
     100% { left: 100%; }
 }
 
+.energy1 .header { background: linear-gradient(90deg, #8B0000, #B22222); }
+.energy2 .header { background: linear-gradient(90deg, #4B0082, #8A2BE2); }
+.energy3 .header { background: linear-gradient(90deg, #006400, #00FF00); }
+.energy4 .header { background: linear-gradient(90deg, #CCCC00, #FFFF00); }
+.energy5 .header { background: linear-gradient(90deg, #000080, #0066FF); }
+
 .logo {
     font-family: 'Press Start 2P', cursive;
-    font-size: 3.5em;
+    font-size: 2.5em;
     text-shadow: 4px 4px 0 var(--black);
     margin-bottom: 15px;
     background: linear-gradient(45deg, var(--gold), #ffffff, var(--gold));
@@ -182,31 +129,37 @@ body::before {
 }
 
 .slogan {
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--black);
     text-shadow: 2px 2px 0 var(--gold);
 }
 
-/* НАВИГАЦИЯ */
 .nav {
     background: rgba(0, 0, 0, 0.9);
     padding: 15px 0;
     border-bottom: 3px solid var(--gold);
     backdrop-filter: blur(10px);
-    white-space: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .nav::-webkit-scrollbar {
     display: none;
 }
 
+.nav .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    min-width: max-content;
+}
+
 .nav-link {
     color: #fff;
     text-decoration: none;
-    margin: 0 8px;
     padding: 10px 18px;
     border: 2px solid var(--gold);
     border-radius: 25px;
@@ -243,58 +196,6 @@ body::before {
     box-shadow: 0 4px 12px rgba(255,215,0,0.4);
 }
 
-/* Контейнер для навигации - чтобы кнопки были по центру */
-.nav .container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 8px;
-}
-
-/* Адаптивность для навигации */
-@media (max-width: 1200px) {
-    .nav-link {
-        font-size: 0.85em;
-        padding: 8px 15px;
-        margin: 0 5px;
-    }
-}
-
-@media (max-width: 992px) {
-    .nav-link {
-        font-size: 0.8em;
-        padding: 8px 12px;
-        margin: 0 4px;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav {
-        padding: 12px 0;
-        text-align: center;
-    }
-    
-    .nav .container {
-        justify-content: flex-start;
-        padding: 0 15px;
-    }
-    
-    .nav-link {
-        font-size: 0.75em;
-        padding: 6px 10px;
-        margin: 0 3px;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-link {
-        font-size: 0.7em;
-        padding: 5px 8px;
-        margin: 0 2px;
-    }
-}
-
-/* КАЗИНО СЕКЦИЯ */
 .casino-section {
     padding: 60px 0;
     background: rgba(0, 0, 0, 0.8);
@@ -309,14 +210,14 @@ body::before {
 
 .slot-title h2 {
     font-family: 'Press Start 2P', cursive;
-    font-size: 2.5em;
+    font-size: 2em;
     color: var(--gold);
     margin-bottom: 15px;
     text-shadow: 3px 3px 0 var(--black);
 }
 
 .slot-subtitle {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 900;
     color: #fff;
     margin-bottom: 10px;
@@ -324,13 +225,12 @@ body::before {
 }
 
 .mellstroy-quote {
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: var(--gold);
     font-style: italic;
     text-shadow: 1px 1px 0 var(--black);
 }
 
-/* СЛОТ АППАРАТ */
 .slot-machine {
     max-width: 800px;
     margin: 0 auto;
@@ -364,11 +264,12 @@ body::before {
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .slot {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border: 5px solid var(--black);
     border-radius: 15px;
     overflow: hidden;
@@ -390,7 +291,7 @@ body::before {
     color: var(--black);
     border: none;
     padding: 20px 50px;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 900;
     border-radius: 50px;
     cursor: pointer;
@@ -402,7 +303,7 @@ body::before {
 }
 
 .spin-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 0 0 30px var(--gold);
 }
 
@@ -414,13 +315,12 @@ body::before {
 
 .meme-text {
     margin-top: 20px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     color: var(--gold);
     font-weight: 900;
     text-align: center;
 }
 
-/* СЕТКА ЭНЕРГЕТИКОВ */
 .energies-section {
     padding: 60px 0;
     background: rgba(0, 0, 0, 0.7);
@@ -428,7 +328,7 @@ body::before {
 
 .energies-section h2 {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2.2em;
     margin-bottom: 40px;
     color: var(--gold);
     text-shadow: 2px 2px 0 var(--black);
@@ -456,7 +356,7 @@ body::before {
 }
 
 .energy-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     border-color: var(--gold);
     box-shadow: 0 10px 25px rgba(255,215,0,0.3);
 }
@@ -476,7 +376,7 @@ body::before {
 .energy-color.blue { background: var(--blue); }
 
 .energy-card h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-bottom: 10px;
     color: var(--gold);
 }
@@ -486,24 +386,22 @@ body::before {
     opacity: 0.8;
 }
 
-/* СЛАЙДЕР ДЛЯ ЭНЕРГЕТИКОВ */
-/* УВЕЛИЧЕННЫЕ СЛАЙДЕРЫ ДЛЯ ЭНЕРГЕТИКОВ */
 .energy-slider {
     position: relative;
-    max-width: 500px; /* Увеличили с 400px */
+    max-width: 400px;
     margin: 30px auto;
     overflow: hidden;
     border-radius: 20px;
     border: 5px solid #ffd700;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     background: rgba(0, 0, 0, 0.3);
-    padding: 15px; /* Увеличили паддинг */
+    padding: 15px;
 }
 
 .slides-container {
     position: relative;
     width: 100%;
-    height: 600px; /* Увеличили с 500px */
+    height: 450px;
     overflow: hidden;
 }
 
@@ -525,9 +423,9 @@ body::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-/* Стрелки слайдера */
 .slider-nav {
     position: absolute;
     top: 50%;
@@ -535,17 +433,17 @@ body::before {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    padding: 0 25px; /* Увеличили отступы */
+    padding: 0 20px;
     z-index: 10;
 }
 
 .slider-btn {
     background: rgba(255, 215, 0, 0.8);
     border: none;
-    width: 60px; /* Увеличили */
-    height: 60px; /* Увеличили */
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    font-size: 28px; /* Увеличили */
+    font-size: 24px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -559,17 +457,16 @@ body::before {
     transform: scale(1.1);
 }
 
-/* Точки-индикаторы */
 .slider-dots {
     display: flex;
     justify-content: center;
-    margin-top: 25px; /* Увеличили отступ */
-    gap: 12px; /* Увеличили расстояние */
+    margin-top: 20px;
+    gap: 10px;
 }
 
 .dot {
-    width: 14px; /* Увеличили */
-    height: 14px; /* Увеличили */
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
@@ -578,64 +475,11 @@ body::before {
 
 .dot.active {
     background: #ffd700;
-    transform: scale(1.3); /* Увеличили эффект */
-}
-
-/* Адаптивность для увеличенных слайдеров */
-@media (max-width: 768px) {
-    .energy-slider {
-        max-width: 400px; /* Увеличили с 300px */
-    }
-    
-    .slides-container {
-        height: 500px; /* Увеличили с 400px */
-    }
-    
-    .slider-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 22px;
-    }
-    
-    .slider-nav {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .energy-slider {
-        max-width: 350px; /* Увеличили с 250px */
-    }
-    
-    .slides-container {
-        height: 450px; /* Увеличили с 350px */
-    }
-    
-    .slider-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-    
-    .dot {
-        width: 12px;
-        height: 12px;
-    }
-}
-
-/* Для очень маленьких экранов */
-@media (max-width: 360px) {
-    .energy-slider {
-        max-width: 300px;
-    }
-    
-    .slides-container {
-        height: 400px;
-    }
+    transform: scale(1.2);
 }
 
 .energy-slogan {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: bold;
     color: #ffd700;
     text-align: center;
@@ -644,13 +488,12 @@ body::before {
     font-style: italic;
 }
 
-/* РЕКОМЕНДАЦИИ */
 .recommendations {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
-    padding: 40px;
+    padding: 30px;
     border-radius: 20px;
-    margin: 40px auto;
+    margin: 30px auto;
     border: 3px solid #ffd700;
     max-width: 700px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -659,13 +502,13 @@ body::before {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 30px 0;
+    gap: 15px;
+    margin: 25px 0;
 }
 
 .stat-item {
     background: rgba(255, 215, 0, 0.2);
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px;
     border: 2px solid #ffd700;
 }
@@ -677,7 +520,7 @@ body::before {
 }
 
 .energy-description {
-    font-size: 1.2em;
+    font-size: 1.1em;
     line-height: 1.6;
     margin: 20px 0;
     color: #fff;
@@ -686,7 +529,6 @@ body::before {
     border-radius: 15px;
 }
 
-/* ПОДВАЛ */
 .footer {
     background: linear-gradient(90deg, #000, #222, #000);
     padding: 40px 0;
@@ -696,9 +538,9 @@ body::before {
 
 .disclaimer {
     background: rgba(255, 0, 0, 0.2);
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border: 2px solid var(--red);
     text-align: center;
 }
@@ -711,99 +553,17 @@ body::before {
 .contact {
     text-align: center;
     margin: 20px 0;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .footer-meme {
     text-align: center;
     color: var(--gold);
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
     margin-top: 20px;
 }
 
-/* АНИМАЦИИ ДЛЯ СЛОТОВ */
-@keyframes spin {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-100px); }
-}
-
-.slot.spinning {
-    animation: spin 0.1s infinite linear;
-}
-
-/* АДАПТИВНОСТЬ */
-@media (max-width: 768px) {
-    .logo {
-        font-size: 2em;
-    }
-    
-    .nav {
-        text-align: center;
-    }
-    
-    .nav-link {
-        display: inline-block;
-        margin: 5px;
-        padding: 10px 20px;
-    }
-    
-    .slot-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .slot {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .energies-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .energy-slider {
-        max-width: 300px;
-    }
-    
-    .slides-container {
-        height: 400px;
-    }
-    
-    .slider-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.5em;
-    }
-    
-    .slot-title h2 {
-        font-size: 1.8em;
-    }
-    
-    .energies-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .nav-link {
-        display: block;
-        margin: 10px 0;
-    }
-    
-    .energy-slider {
-        max-width: 250px;
-    }
-    
-    .slides-container {
-        height: 350px;
-    }
-}
-/* ПРОМО-БЛОКИ ДЛЯ ШАПКИ - ФИКСИРОВАННЫЕ РАЗМЕРЫ */
 .promo-block {
     position: absolute;
     top: 15px;
@@ -817,12 +577,12 @@ body::before {
     border-radius: 12px;
     border: 2px solid var(--gold);
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    max-width: 280px;
+    max-width: 250px;
 }
 
 .promo-image {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     border: 2px solid var(--gold);
     object-fit: cover;
@@ -831,7 +591,7 @@ body::before {
 
 .promo-text {
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: var(--gold);
     text-shadow: 1px 1px 0 var(--black);
     text-align: center;
@@ -839,25 +599,48 @@ body::before {
     flex-grow: 1;
 }
 
-/* Адаптивность для промо-блоков */
-@media (max-width: 992px) {
-    .promo-block {
-        max-width: 240px;
-        gap: 10px;
-        padding: 6px 10px;
-    }
-    
-    .promo-image {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .promo-text {
-        font-size: 0.7em;
-    }
-}
-
 @media (max-width: 768px) {
+    .logo {
+        font-size: 1.8em;
+    }
+    
+    .slogan {
+        font-size: 1em;
+    }
+    
+    .slot-title h2 {
+        font-size: 1.5em;
+    }
+    
+    .slot {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .spin-button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+    
+    .energies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .energy-slider {
+        max-width: 320px;
+    }
+    
+    .slides-container {
+        height: 380px;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
     .promo-block {
         position: relative;
         top: 0;
@@ -868,168 +651,70 @@ body::before {
     }
     
     .promo-image {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
     
     .promo-text {
         font-size: 0.6em;
     }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
 }
 
 @media (max-width: 480px) {
+    .logo {
+        font-size: 1.5em;
+    }
+    
+    .slot-container {
+        gap: 10px;
+    }
+    
+    .slot {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .energies-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .energy-slider {
+        max-width: 280px;
+    }
+    
+    .slides-container {
+        height: 320px;
+    }
+    
+    .nav .container {
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.7em;
+    }
+    
     .promo-block {
         max-width: 180px;
-        padding: 5px 8px;
     }
     
     .promo-image {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     
     .promo-text {
         font-size: 0.55em;
-    }
-
-}
-/* ФИКС ПРОКРУТКИ ДЛЯ МОБИЛЬНЫХ */
-html, body {
-    overflow-x: hidden;
-    height: 100%;
-    position: relative;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Отключаем масштабирование на тап */
-* {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-/* Разрешаем выделение текста в контенте */
-.container, .recommendations, .energy-description, .disclaimer {
-    -webkit-user-select: text;
-    user-select: text;
-}
-
-/* ФИКС ДЛЯ ФИКСИРОВАННЫХ ФОНОВ НА МОБИЛЬНЫХ */
-@media (max-width: 768px) {
-    body::before,
-    .energy-page::after,
-    .main-page::after {
-        position: absolute;
-        height: 100vh;
-        transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
-    }
-    
-    /* Улучшаем производительность прокрутки */
-    .container, .energy-content, .recommendations {
-        transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
-    }
-}
-
-/* ФИКС ДЛЯ IOS SAFARI */
-@supports (-webkit-touch-callout: none) {
-    body {
-        height: -webkit-fill-available;
-    }
-    
-    .main-page, .energy-page {
-        min-height: -webkit-fill-available;
-    }
-}
-
-/* Убираем скачки при клике на мобильных */
-a, button, .nav-link, .energy-card, .spin-button {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-}
-/* ФИКС ПРОКРУТКИ ДЛЯ МОБИЛЬНЫХ */
-.main-page { overflow: visible !important; }
-.energy-page { overflow: visible !important; }
-body { overflow-x: hidden; }
-html { overflow-x: hidden; }
-
-/* ФИКС ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
-@media (max-width: 768px) {
-    .energy-image-container {
-        width: 250px !important;
-        height: 400px !important;
-        margin: 20px auto;
-    }
-    
-    .logo {
-        font-size: 1.8em !important;
-        text-shadow: 2px 2px 0 var(--black) !important;
-    }
-    
-    .slogan {
-        font-size: 1em !important;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-    }
-    
-    .recommendations {
-        padding: 20px !important;
-        margin: 20px auto !important;
-    }
-    
-    .container {
-        padding: 0 15px !important;
-    }
-    
-    /* Убираем сложные анимации на мобильных */
-    .energy-page::before {
-        font-size: 150px !important;
-    }
-    
-    .jewels, .dollar-sign, .crack, .snowflake {
-        display: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .energy-image-container {
-        width: 200px !important;
-        height: 320px !important;
-    }
-    
-    .logo {
-        font-size: 1.5em !important;
-    }
-    
-    .nav-link {
-        padding: 8px 12px !important;
-        font-size: 0.8em !important;
-        margin: 2px !important;
-    }
-    
-    .promo-block {
-        max-width: 150px !important;
-    }
-    
-    .promo-text {
-        font-size: 0.6em !important;
-    }
-}
-/* ВРЕМЕННЫЙ ФИКС ДЛЯ ТЕСТИРОВАНИЯ */
-@media (max-width: 768px) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    .energy-image-container {
-        width: 200px !important;
-        height: 300px !important;
     }
 }

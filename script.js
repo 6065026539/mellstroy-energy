@@ -1,98 +1,59 @@
-// Массивы с изображениями для каждого слота
-const slotImages = {
-    slot1: ['images/slot1.jpeg', 'images/slot2.jpg', 'images/slot3.gif'],
-    slot2: ['images/slot1.jpeg', 'images/slot2.jpg', 'images/slot3.gif'], 
-    slot3: ['images/slot1.jpeg', 'images/slot2.jpg', 'images/slot3.gif']
-};
+// Упрощенный и исправленный скрипт для слотов
+let isSpinning = false;
 
-// Финальные изображения, которые должны выпасть
-const finalImages = ['images/slot2.jpg', 'images/slot2.jpg', 'images/slot2.jpg'];
-
-// Функция для прокрутки слотов
 function spinSlots() {
+    if (isSpinning) return;
+    
+    isSpinning = true;
     const slots = document.querySelectorAll('.slot');
-    const sound = document.getElementById('slotSound');
     const spinButton = document.querySelector('.spin-button');
     
-    // Блокируем кнопку на время анимации
     spinButton.disabled = true;
     spinButton.style.opacity = '0.7';
+    spinButton.textContent = 'КРУТИТСЯ...';
     
-    // Воспроизводим звук
-    if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch(e => console.log('Audio play failed:', e));
-    }
+    const images = ['images/slot1.jpeg', 'images/slot2.jpg', 'images/slot3.gif'];
+    let completedSlots = 0;
     
-    // Запускаем анимацию для каждого слота
     slots.forEach((slot, index) => {
-        animateSlot(slot, index);
-    });
-    
-    // Останавливаем через 3 секунды
-    setTimeout(() => {
-        stopSlots(slots);
+        let spins = 0;
+        const maxSpins = 10 + Math.random() * 10;
+        const img = slot.querySelector('.slot-image');
         
-        // Разблокируем кнопку
+        const spinInterval = setInterval(() => {
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            img.src = randomImage;
+            spins++;
+            
+            if (spins >= maxSpins) {
+                clearInterval(spinInterval);
+                
+                setTimeout(() => {
+                    const finalImage = images[Math.floor(Math.random() * images.length)];
+                    img.src = finalImage;
+                    
+                    completedSlots++;
+                    if (completedSlots === slots.length) {
+                        finishSpin();
+                    }
+                }, 300);
+            }
+        }, 100);
+    });
+}
+
+function finishSpin() {
+    isSpinning = false;
+    const spinButton = document.querySelector('.spin-button');
+    
+    setTimeout(() => {
+        showWinMessage();
         spinButton.disabled = false;
         spinButton.style.opacity = '1';
-        
-        // Показываем результат с задержкой
-        setTimeout(() => {
-            showWinMessage();
-        }, 500);
-        
-    }, 3000);
+        spinButton.innerHTML = '<span>КРУТИТЬ СЛОТ!</span><div class="button-glow"></div>';
+    }, 500);
 }
 
-// Анимация прокрутки одного слота
-function animateSlot(slot, slotIndex) {
-    const images = slotImages[`slot${slotIndex + 1}`];
-    let currentIndex = 0;
-    let spinCount = 0;
-    const totalSpins = 20 + Math.random() * 10; // Случайное количество прокруток
-    
-    const spinInterval = setInterval(() => {
-        // Меняем изображение
-        const img = slot.querySelector('.slot-image');
-        if (img) {
-            img.src = images[currentIndex];
-            img.alt = `Слот ${currentIndex + 1}`;
-        }
-        
-        // Переходим к следующему изображению
-        currentIndex = (currentIndex + 1) % images.length;
-        spinCount++;
-        
-        // Запоминаем интервал для остановки
-        slot.spinInterval = spinInterval;
-        
-        // Останавливаем когда достигли нужного количества прокруток
-        if (spinCount >= totalSpins) {
-            clearInterval(spinInterval);
-        }
-    }, 100); // Скорость смены изображений
-}
-
-// Остановка всех слотов
-function stopSlots(slots) {
-    slots.forEach((slot, index) => {
-        // Останавливаем анимацию
-        if (slot.spinInterval) {
-            clearInterval(slot.spinInterval);
-        }
-        
-        // Устанавливаем финальное изображение
-        const finalImageIndex = Math.floor(Math.random() * finalImages.length);
-        const img = slot.querySelector('.slot-image');
-        if (img) {
-            img.src = finalImages[finalImageIndex];
-            img.alt = `Финальный слот ${finalImageIndex + 1}`;
-        }
-    });
-}
-
-// Показ сообщения о выигрыше
 function showWinMessage() {
     const messages = [
         "🎉 ВЫ ВЫИГРАЛИ! МЕСЯЧНЫЙ ЗАПАС ЭНЕРГЕТИКОВ ВАШ! 🎉",
@@ -103,7 +64,6 @@ function showWinMessage() {
     
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     
-    // Создаем всплывающее сообщение
     const winPopup = document.createElement('div');
     winPopup.style.cssText = `
         position: fixed;
@@ -136,50 +96,12 @@ function showWinMessage() {
             border-radius: 10px;
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
-        ">Отдать Мелстрою</button>
+        ">Закрыть</button>
     `;
     
     document.body.appendChild(winPopup);
 }
 
-// Случайные фразы Mellstroy при загрузке страницы
-const mellstroyPhrases = [
-    "Добро пожаловать на самый энергетический сайт!",
-    "Заряжайся по-взрослому!",
-    "Здесь энергия бьет ключом!",
-    "Принимай регулярно: утром, днем и перед стримом!",
-    "Это не просто энергетик, это образ жизни!"
-];
-
-// Предзагрузка изображений для плавной анимации
-function preloadImages() {
-    // Более простая предзагрузка для мобильных
-    const allImages = [...new Set([
-        'images/slot1.jpeg', 
-        'images/slot2.jpg', 
-        'images/slot3.gif'
-    ])];
-    
-    allImages.forEach(src => {
-        // Проверяем существование файлов
-        const img = new Image();
-        img.onerror = function() {
-            console.log('Не удалось загрузить изображение:', src);
-        };
-        img.src = src;
-    });
-}
-    
-    // Добавляем эффект параллакса для фона главной страницы
-    if (document.querySelector('.main-background')) {
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const background = document.querySelector('.main-background');
-            if (background) {
-                background.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-    }
-
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("💊 MELLSTROY ENERGY - Сайт загружен!");
 });
-

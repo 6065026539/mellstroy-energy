@@ -153,20 +153,22 @@ const mellstroyPhrases = [
 
 // Предзагрузка изображений для плавной анимации
 function preloadImages() {
-    const allImages = [...new Set([...slotImages.slot1, ...slotImages.slot2, ...slotImages.slot3, ...finalImages])];
+    // Более простая предзагрузка для мобильных
+    const allImages = [...new Set([
+        'images/slot1.jpeg', 
+        'images/slot2.jpg', 
+        'images/slot3.gif'
+    ])];
     
     allImages.forEach(src => {
+        // Проверяем существование файлов
         const img = new Image();
+        img.onerror = function() {
+            console.log('Не удалось загрузить изображение:', src);
+        };
         img.src = src;
     });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const randomPhrase = mellstroyPhrases[Math.floor(Math.random() * mellstroyPhrases.length)];
-    console.log(`💊 MELLSTROY: "${randomPhrase}"`);
-    
-    // Предзагрузка изображений
-    preloadImages();
     
     // Добавляем эффект параллакса для фона главной страницы
     if (document.querySelector('.main-background')) {
@@ -180,3 +182,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+

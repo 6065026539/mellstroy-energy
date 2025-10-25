@@ -14,6 +14,12 @@
     --gold: #ffd700;
 }
 
+html {
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--black);
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
@@ -21,12 +27,29 @@ body {
     min-height: 100vh;
     position: relative;
     -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
 }
 
-html {
-    overflow-x: hidden;
+/* Восстановление скроллбара */
+body::-webkit-scrollbar {
+    width: 12px;
 }
 
+body::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 6px;
+    border: 2px solid var(--black);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #ffed4e;
+}
+
+/* Основные стили остаются без изменений */
 body::before {
     content: "";
     position: fixed;
@@ -146,7 +169,16 @@ body::before {
 }
 
 .nav::-webkit-scrollbar {
-    display: none;
+    height: 8px;
+}
+
+.nav::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+}
+
+.nav::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
 }
 
 .nav .container {
@@ -599,6 +631,7 @@ body::before {
     flex-grow: 1;
 }
 
+/* Улучшения для мобильных устройств */
 @media (max-width: 768px) {
     .logo {
         font-size: 1.8em;
@@ -667,6 +700,12 @@ body::before {
         padding: 8px 12px;
         font-size: 0.8em;
     }
+    
+    /* Улучшение скролла на мобильных */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+    }
 }
 
 @media (max-width: 480px) {
@@ -717,4 +756,26 @@ body::before {
     .promo-text {
         font-size: 0.55em;
     }
+}
+
+/* Фикс для проблем со скроллом */
+.main-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Улучшение производительности скролла */
+.casino-section,
+.energies-section,
+.footer {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
 }

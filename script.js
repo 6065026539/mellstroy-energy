@@ -118,7 +118,7 @@ function showWinMessage() {
     winPopup.innerHTML = `
         <div style="margin-bottom: 15px;">${randomMessage}</div>
         <div style="font-size: 0.8em; margin-top: 15px;">"Как говорится, либо пан, либо пропал!"</div>
-        <button class="popup-button" onclick="this.parentElement.remove()">Закрыть</button>
+        <button class="popup-button" onclick="this.parentElement.remove()">Отдать меллстрою</button>
     `;
     
     document.body.appendChild(winPopup);
@@ -160,3 +160,4 @@ document.addEventListener('DOMContentLoaded', function() {
 // Глобальные функции
 window.showWinMessage = showWinMessage;
 window.showLoseMessage = showLoseMessage;
+

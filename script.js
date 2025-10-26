@@ -1,9 +1,7 @@
-// Улучшенный и исправленный скрипт для слотов
+// ПРОСТОЙ РАБОЧИЙ СКРИПТ ДЛЯ СЛОТА
 let isSpinning = false;
 let slotSound = null;
-let audioEnabled = false;
 
-// Функция для предзагрузки и включения аудио
 function initAudio() {
     if (slotSound) return;
     
@@ -11,53 +9,24 @@ function initAudio() {
         slotSound = new Audio('sounds/slot-sound.mp3');
         slotSound.preload = 'auto';
         slotSound.volume = 0.7;
-        
-        // Создаем контекст для разблокировки аудио
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (AudioContext) {
-            const audioContext = new AudioContext();
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-        }
     } catch (error) {
-        console.log('Audio initialization error:', error);
-    }
-}
-
-function enableAudio() {
-    if (audioEnabled) return;
-    
-    initAudio();
-    audioEnabled = true;
-    
-    // Воспроизводим и сразу останавливаем для разблокировки
-    if (slotSound) {
-        const playPromise = slotSound.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                slotSound.pause();
-                slotSound.currentTime = 0;
-            }).catch(e => {
-                console.log('Audio unlock failed:', e);
-            });
-        }
+        console.log('Audio init error:', error);
     }
 }
 
 function spinSlots() {
     if (isSpinning) return;
     
-    // Включаем аудио при первом клике
-    if (!audioEnabled) {
-        enableAudio();
+    // ВКЛЮЧАЕМ АУДИО ПРИ ПЕРВОМ КЛИКЕ
+    if (!slotSound) {
+        initAudio();
     }
     
     isSpinning = true;
     const slots = document.querySelectorAll('.slot');
     const spinButton = document.querySelector('.spin-button');
     
-    // Воспроизводим звук
+    // ЗВУК
     playSlotSound();
     
     spinButton.disabled = true;
@@ -66,6 +35,7 @@ function spinSlots() {
     
     const images = ['images/slot1.jpeg', 'images/slot2.jpg', 'images/slot3.gif'];
     let completedSlots = 0;
+    const finalImages = [];
     
     slots.forEach((slot, index) => {
         let spins = 0;
@@ -75,7 +45,6 @@ function spinSlots() {
         const spinInterval = setInterval(() => {
             const randomImage = images[Math.floor(Math.random() * images.length)];
             img.src = randomImage;
-            img.alt = `Слот ${spins + 1}`;
             spins++;
             
             if (spins >= maxSpins) {
@@ -84,10 +53,11 @@ function spinSlots() {
                 setTimeout(() => {
                     const finalImage = images[Math.floor(Math.random() * images.length)];
                     img.src = finalImage;
+                    finalImages[index] = finalImage;
                     
                     completedSlots++;
                     if (completedSlots === slots.length) {
-                        finishSpin();
+                        finishSpin(finalImages);
                     }
                 }, 300);
             }
@@ -96,38 +66,32 @@ function spinSlots() {
 }
 
 function playSlotSound() {
-    if (!slotSound || !audioEnabled) {
-        console.log('Sound not ready, trying to enable...');
-        enableAudio();
-        return;
-    }
+    if (!slotSound) return;
     
     try {
         slotSound.currentTime = 0;
-        const playPromise = slotSound.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.catch(e => {
-                console.log('Audio play failed:', e);
-                // Пробуем снова через небольшой промежуток
-                setTimeout(() => {
-                    if (slotSound) {
-                        slotSound.play().catch(e => console.log('Retry failed:', e));
-                    }
-                }, 100);
-            });
-        }
+        slotSound.play().catch(e => {
+            console.log('Audio play failed:', e);
+        });
     } catch (error) {
         console.log('Sound error:', error);
     }
 }
 
-function finishSpin() {
+function finishSpin(finalImages) {
     isSpinning = false;
     const spinButton = document.querySelector('.spin-button');
     
+    // ПРОВЕРКА НА ВЫИГРЫШ
+    const allSame = finalImages.every(img => img === finalImages[0]);
+    
     setTimeout(() => {
-        showWinMessage();
+        if (allSame) {
+            showWinMessage();
+        } else {
+            showLoseMessage();
+        }
+        
         spinButton.disabled = false;
         spinButton.style.opacity = '1';
         spinButton.querySelector('span').textContent = 'КРУТИТЬ СЛОТ!';
@@ -138,107 +102,61 @@ function showWinMessage() {
     const messages = [
         "🎉 ВЫ ВЫИГРАЛИ! МЕСЯЧНЫЙ ЗАПАС ЭНЕРГЕТИКОВ ВАШ! 🎉",
         "🔥 УДАЧА НА ТВОЕЙ СТОРОНЕ! ЗАБИРАЙ ПРИЗ! 🔥",
-        "💸 ДЖЕКПОТ! МЕЛЛСТРОЙ ГОРДИТСЯ ТОБОЙ! 💸",
-        "🚀 ВЫ Сорвали Куш! Энергия бьет ключом! 🚀"
+        "💸 ДЖЕКПОТ! МЕЛЛСТРОЙ ГОРДИТСЯ ТОБОЙ! 💸"
     ];
     
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     
-    // Удаляем существующие попапы
-    const existingPopup = document.querySelector('.win-popup');
+    // Удаляем старые попапы
+    const existingPopup = document.querySelector('.win-popup, .lose-popup');
     if (existingPopup) {
         existingPopup.remove();
     }
     
     const winPopup = document.createElement('div');
     winPopup.className = 'win-popup';
-    winPopup.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(45deg, #ffd700, #ffed4e);
-        color: #000;
-        padding: 30px;
-        border-radius: 20px;
-        border: 5px solid #000;
-        font-size: 1.5em;
-        font-weight: bold;
-        text-align: center;
-        z-index: 10000;
-        box-shadow: 0 0 50px rgba(255,215,0,0.8);
-        font-family: 'Press Start 2P', cursive;
-        max-width: 80vw;
-        word-wrap: break-word;
-    `;
-    
     winPopup.innerHTML = `
         <div style="margin-bottom: 15px;">${randomMessage}</div>
         <div style="font-size: 0.8em; margin-top: 15px;">"Как говорится, либо пан, либо пропал!"</div>
-        <button onclick="this.parentElement.remove()" style="
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #000;
-            color: #ffd700;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.7em;
-        ">Отдать меллстрою</button>
+        <button class="popup-button" onclick="this.parentElement.remove()">Закрыть</button>
     `;
     
     document.body.appendChild(winPopup);
 }
 
-// Инициализация при загрузке страницы
+function showLoseMessage() {
+    // Удаляем старые попапы
+    const existingPopup = document.querySelector('.win-popup, .lose-popup');
+    if (existingPopup) {
+        existingPopup.remove();
+    }
+    
+    const losePopup = document.createElement('div');
+    losePopup.className = 'lose-popup';
+    losePopup.innerHTML = `
+        <div style="margin-bottom: 15px;">😞 В СЛЕДУЮЩИЙ РАЗ ПОВЕЗЕТ! 😞</div>
+        <div style="font-size: 0.8em; margin-top: 15px;">"Попробуй еще раз - удача любит смелых!"</div>
+        <button class="popup-button" onclick="this.parentElement.remove()">Закрыть</button>
+    `;
+    
+    document.body.appendChild(losePopup);
+}
+
+// ПРОСТАЯ ИНИЦИАЛИЗАЦИЯ
 document.addEventListener('DOMContentLoaded', function() {
     console.log("💊 MELLSTROY ENERGY - Сайт загружен!");
     
-    // Предварительная инициализация аудио
+    // Предзагрузка аудио
     initAudio();
     
-    // Включаем аудио при любом взаимодействии
-    const enableAudioOnInteraction = () => {
-        if (!audioEnabled) {
-            enableAudio();
+    // Включаем аудио при любом клике
+    document.addEventListener('click', function() {
+        if (!slotSound) {
+            initAudio();
         }
-    };
-    
-    // Добавляем обработчики для различных событий
-    ['click', 'touchstart', 'keydown', 'scroll'].forEach(event => {
-        document.addEventListener(event, enableAudioOnInteraction, { 
-            once: true,
-            passive: true 
-        });
-    });
-    
-    // Улучшение производительности скролла
-    document.body.style.webkitOverflowScrolling = 'touch';
-    
-    // Фикс для мобильного скролла
-    let touchStartY = 0;
-    
-    document.addEventListener('touchstart', function(e) {
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    document.addEventListener('touchmove', function(e) {
-        // Разрешаем нативный скролл
-    }, { passive: true });
+    }, { once: true });
 });
 
-// Предзагрузка критических ресурсов
-window.addEventListener('load', function() {
-    // Предзагрузка изображений для слотов
-    const slotImages = [
-        'images/slot1.jpeg',
-        'images/slot2.jpg', 
-        'images/slot3.gif'
-    ];
-    
-    slotImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-});
+// Глобальные функции
+window.showWinMessage = showWinMessage;
+window.showLoseMessage = showLoseMessage;
